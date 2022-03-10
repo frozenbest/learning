@@ -16,3 +16,48 @@ public:
         children = _children;
     }
 };
+
+// 方案一 递归
+
+vector<int> result;
+void dg(Node* root) {
+    if(root != 0) {
+        result.emplace_back(root->val);
+        for(auto it = root->children.begin(); it != root->children.end(); ++it) {
+            dg(*it);
+        }
+    }
+}
+vector<int> preorder(Node* root) {
+    dg(*it);
+    return result;
+}
+
+
+// 方案二 迭代
+
+vector<int> preorder(Node* root) {
+    vector<int> result;
+    stack<Node*> s; // 先入后出
+    s.push(root);
+    
+    while(!s.empty()) {
+        Node* node = s.top();
+        s.pop();
+        result.emplace_back(node->val);
+        for(auto it = node->children.rbegin(); it != node->children.rend(); ++it)
+        {
+            s.push(*it);
+        }
+    }
+    return result;
+}
+
+
+
+
+
+
+
+
+
